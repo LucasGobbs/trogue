@@ -55,7 +55,8 @@ impl State for GameState {
                 .add_text(format!("{})",mousey).as_str(),Color::GREEN)
                 .generate();
 
-        let mut div = DividerComponent::new(Component::new(1,10).size(11,1));
+        let mut div = DividerComponent::new(Component::new(1,10)
+                                                                        .size(11,1));
         div.line_char('#')
            .vertical()
            .corner_char('@')
@@ -69,7 +70,7 @@ impl State for GameState {
         self.app.buf().g_draw(Rect::new(0,0,75,75,false),'#',Color::rgb(0.6,0.1,0.8));
         self.app.buf().c_draw(life_txt);
         self.app.buf().set_char(mousex, mousey, 'x', Color::WHITE);
-        self.buffer_backend.draw(self.app.clone().draw(2), ctx);
+        self.buffer_backend.draw(self.app.clone().draw(), ctx);
 
         Ok(())
     }

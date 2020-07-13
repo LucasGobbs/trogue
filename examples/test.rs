@@ -68,7 +68,7 @@ impl State for GameState {
      
         //self.console.draw(ctx);
 
-        self.buffer_backend.draw(self.app.clone().draw(2), ctx);
+        self.buffer_backend.draw(self.app.clone().draw(), ctx);
 
         Ok(())
     }

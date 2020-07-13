@@ -25,7 +25,7 @@ impl TrogueApp {
     pub fn buf(&mut self) ->&mut Buffer {
         &mut self.buffers[self.current_buffer]
     }
-    pub fn draw(self, mx: i32) -> Buffer {
+    pub fn draw(self) -> Buffer {
         let n_buf = self.buffers[self.current_buffer].clone();
         
         n_buf
