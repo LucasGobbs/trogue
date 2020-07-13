@@ -37,6 +37,7 @@ impl Backend for TetraBackend {
                             self.cell_size * x as f32,
                             self.cell_size * y as f32,
                         ))
+                  
                         .color(cell.background)
                         .clip(Rectangle::new(sprite_x, sprite_y, 8.0, 8.0)),
                 );
@@ -56,7 +57,7 @@ impl Backend for TetraBackend {
                             self.cell_size * x as f32 ,
                             self.cell_size * y as f32 ,
                         ))
-
+                       
                         .color(cell.foreground)
                         .clip(Rectangle::new(sprite_x, sprite_y, 8.0, 8.0)),
                 ); 

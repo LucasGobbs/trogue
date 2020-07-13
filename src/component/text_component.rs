@@ -7,18 +7,23 @@ use tetra::graphics::Color;
 pub struct TextComponent{
     pub component: Component,
     text: Vec<(String, Color)>,
-   
+    centered: bool,
 }
 impl TextComponent {
     pub fn new(cmp: Component) -> Self{
         TextComponent{
             component: cmp,
             text: Vec::new(),
+            centered: false,
         }
     }
     pub fn add_text(&mut self, word: &str, color: Color) ->&mut Self{
         self.text.push((String::from(word),color));
         
+        self
+    }
+    pub fn centered(&mut self) -> &mut Self{
+        self.centered = true;
         self
     }
     fn generate_size(&mut self){
@@ -41,7 +46,12 @@ impl ComponentDrawable for TextComponent {
         n_buf
     }
     fn get_position(self) -> (i32,i32){
-        self.component.pos
+        if self.centered {
+            (self.component.pos.0 - self.component.size.0 / 2 , self.component.pos.1)
+        } else {
+            self.component.pos
+        }
+        
     }
     // fn get_size(&mut self) -> (i32,i32){
     //     self.component.size

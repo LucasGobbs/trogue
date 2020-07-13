@@ -1,6 +1,6 @@
 
 use trogue::backend::{Backend, TetraBackend};
-use trogue::buffer_app::BufferApp;
+use trogue::trogue_app::TrogueApp;
 use trogue::component::*;
 use trogue::shape::*;
 
@@ -11,7 +11,7 @@ use tetra::{Context, ContextBuilder, State};
 struct GameState {
  
     buffer_backend: TetraBackend,
-    app: BufferApp,
+    app: TrogueApp,
 }
 impl GameState {
     fn new(ctx: &mut Context) -> tetra::Result<GameState> {
@@ -23,7 +23,7 @@ impl GameState {
         Ok(GameState {
 
             buffer_backend,
-            app: BufferApp::new(150,100),
+            app: TrogueApp::new(75,75),
         })
     }
 }
@@ -46,10 +46,14 @@ impl State for GameState {
 
         self.app.buf().set_char(mousex,mousey,'█',Color::GREEN);
         
-        let mut life_txt = TextComponent::new(Component::new(0,0));
-        life_txt.add_text("Fala;",Color::WHITE)
-                .add_text(" ai mano",Color::RED)
+        let mut life_txt = TextComponent::new(Component::new(mousex,
+                                                                                   mousey + 1));
+                                                        
+        life_txt.centered()
+                .add_text(format!("({},",mousex).as_str(),Color::GREEN)
+                .add_text(format!("{})",mousey).as_str(),Color::GREEN)
                 .generate();
+
         let mut div = DividerComponent::new(Component::new(1,10).size(11,1));
         div.line_char('#')
            .vertical()
@@ -57,10 +61,13 @@ impl State for GameState {
            .center_char('0')
            .generate();
         
-        self.app.buf().c_draw(life_txt);
+        
         self.app.buf().c_draw(div);
-        self.app.buf().g_draw(Line::new(50,50,mousex,mousey),'.',Color::BLUE);
-
+        
+        self.app.buf().g_draw(Line::new(0,0,mousex,mousey),'.',Color::rgb(0.6,0.1,0.8));
+        self.app.buf().g_draw(Rect::new(0,0,75,75,false),'#',Color::rgb(0.6,0.1,0.8));
+        self.app.buf().c_draw(life_txt);
+        self.app.buf().set_char(mousex, mousey, 'x', Color::WHITE);
         self.buffer_backend.draw(self.app.clone().draw(2), ctx);
 
         Ok(())
@@ -68,7 +75,7 @@ impl State for GameState {
 }
 fn main() -> tetra::Result {
    
-    ContextBuilder::new("Terminal", 150 * 8, 100 * 8)
+    ContextBuilder::new("Terminal", 75 * 8 , 75 * 8)
        // .timestep(Timestep::Fixed(30.0))
         .quit_on_escape(true)
         .build()?

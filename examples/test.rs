@@ -1,6 +1,6 @@
 
 use trogue::backend::{Backend, TetraBackend};
-use trogue::buffer_app::BufferApp;
+use trogue::trogue_app::TrogueApp;
 use trogue::component::*;
 
 use tetra::graphics::{self, Color, Texture};
@@ -13,7 +13,7 @@ use tetra::{Context, ContextBuilder, State};
 struct GameState {
  
     buffer_backend: TetraBackend,
-    app: BufferApp,
+    app: TrogueApp,
 }
 
 
@@ -27,7 +27,7 @@ impl GameState {
         Ok(GameState {
 
             buffer_backend,
-            app: BufferApp::new(150,100),
+            app: TrogueApp::new(150,100),
         })
     }
 }
