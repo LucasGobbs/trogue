@@ -30,7 +30,8 @@ impl GameState {
 
 impl State for GameState {
     fn update(&mut self, ctx: &mut Context) -> tetra::Result {
-        
+        self.app.set_mouse_pos((input::get_mouse_position(ctx).x / 8.0) as i32, 
+                               (input::get_mouse_position(ctx).y / 8.0) as i32);
         Ok(())
     }
 
@@ -41,8 +42,8 @@ impl State for GameState {
         self.app.buf().clear();
       
    
-        let mousex = (input::get_mouse_position(ctx).x / 8.0) as i32;
-        let mousey = (input::get_mouse_position(ctx).y / 8.0) as i32;
+        let mousex = self.app.mouse_pos.0;
+        let mousey = self.app.mouse_pos.1;
 
         self.app.buf().set_char(mousex,mousey,'█',Color::GREEN);
         
