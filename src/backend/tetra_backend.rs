@@ -2,6 +2,8 @@ use crate::backend::Backend;
 use crate::buffer::{Buffer};
 
 use tetra::{Context};
+
+use tetra::graphics::text::{Font, Text};
 use tetra::graphics::{self, Color, Texture, DrawParams, Rectangle};
 use tetra::math::Vec2;
 #[derive(Clone)]
@@ -19,7 +21,24 @@ impl TetraBackend {
             cell_size
         }
     }
+    pub fn test(&mut self,buf: Buffer, ctx: &mut Context, path: &'static str){
+        let text = Text::new(
+            "Hello, world!\n\nThis is some text being rendered from a TTF font.",
+            Font::vector(ctx, path, 16.0).unwrap(),
+        );
+        graphics::draw(
+            ctx,
+            &text,
+            DrawParams::new()
+                .position(Vec2::new(
+                    10.0,
+                    10.0 ,
+                ))
+        ); 
+
+    }
 }
+
 impl Backend for TetraBackend {
     type Context = Context;
     fn draw(&mut self,buf: Buffer, ctx: &mut Context){

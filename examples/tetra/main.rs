@@ -3,6 +3,7 @@ use trogue::backend::{Backend, TetraBackend};
 use trogue::trogue_app::TrogueApp;
 use trogue::component::*;
 use trogue::shape::*;
+use trogue::buffer::*;
 
 use tetra::graphics::{self, Color, Texture};
 use tetra::input::{self, Key};
@@ -72,6 +73,7 @@ impl State for GameState {
         self.app.buf().set_char(mousex, mousey, 'x', Color::WHITE);
         self.buffer_backend.draw(self.app.clone().draw(), ctx);
 
+        self.buffer_backend.test(Buffer::new(15,15),ctx,"./examples/resources/RobotY.ttf");
         Ok(())
     }
 }
