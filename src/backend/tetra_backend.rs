@@ -2,7 +2,7 @@ use crate::backend::Backend;
 use crate::buffer::{Buffer};
 
 use tetra::{Context};
-
+use tetra::input::{self, Key};
 use tetra::graphics::text::{Font, Text};
 use tetra::graphics::{self, Color, Texture, DrawParams, Rectangle};
 use tetra::math::Vec2;
@@ -24,16 +24,17 @@ impl TetraBackend {
     pub fn test(&mut self,buf: Buffer, ctx: &mut Context, path: &'static str){
         let text = Text::new(
             "Hello, world!\n\nThis is some text being rendered from a TTF font.",
-            Font::vector(ctx, path, 16.0).unwrap(),
+            Font::vector(ctx, path, 12.0).unwrap(),
         );
         graphics::draw(
             ctx,
             &text,
             DrawParams::new()
                 .position(Vec2::new(
-                    10.0,
-                    10.0 ,
+                    input::get_mouse_position(ctx).x ,
+                    input::get_mouse_position(ctx).y ,
                 ))
+                .origin(Vec2::new(0.0,6.0))
         ); 
 
     }
