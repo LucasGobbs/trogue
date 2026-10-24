@@ -88,7 +88,3 @@ SDL2 only, tested with the official SDL2 2.32.x framework. `sdl2-compat` and SDL
 - `Curve` is an empty stub
 - No background support yet
 - One backend only
-
-## License
-
-MIT, placeholder until I add the LICENSE file.
