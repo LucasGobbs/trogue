@@ -11,3 +11,6 @@ tetra = "0.4.0"
 itertools = "0.9.0"
 rand = "0.7"
 regex = "1"
+[patch.crates-io]
+sdl2 = { path = "vendored-sdl2" }
+sdl2-sys = { path = "vendored-sdl2-sys" }

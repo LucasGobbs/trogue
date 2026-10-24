@@ -1,1 +1,3 @@
 /target
+/vendored-sdl2
+/vendored-sdl2-sys
